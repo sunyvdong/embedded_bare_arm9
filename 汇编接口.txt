@@ -1,0 +1,30 @@
+extern void watch_dog_disable();
+extern void clock_mpll_init(int mdiv, int pdiv,int sdiv, int fhpdiv);
+extern void led_init(int control, int ioconfig);
+extern void led_set(int data);
+extern void uart_init(int select_uart, int ubrdiv);
+extern void uart_putc(int select_uart, char ch);
+extern char uart_getc(int select_uart);
+extern void sdram_init();
+extern void relocate_copy(unsigned int dest_ptr, unsigned int src_ptr, unsigned int size);
+extern void relocate_clear(unsigned int dest_ptr, unsigned int size);
+extern void enable_cpu_irq();  //无输入输出参数
+extern void disable_cpu_irq();  //无输入输出参数
+extern void int_crl_mask_able(unsigned int ctl, unsigned int mask); //r0表示设置哪个中断控制器，r1表示是否使能控制器
+extern void sub_int_crl_mask_able(unsigned int ctl, unsigned int mask); //r0表示设置哪个中断控制器，r1表示是否使能控制器
+extern unsigned int int_get_offset(); //r0返回中断值
+extern void clear_int_pnd(unsigned int clear_bits);  //r0表示清除哪一位的中断
+extern void key_int_init();
+extern unsigned int nor_flash_read(const unsigned int nor_src_ptr, const unsigned int sz, const unsigned int dest_ptr);
+extern void nand_flash_init();
+extern void nand_flash_attr(unsigned int *attr_addr);
+extern unsigned int nand_flash_maker(unsigned int *attr_addr);
+extern unsigned int nand_flash_device(unsigned int *attr_addr);
+extern unsigned int nand_flash_page_size(unsigned int *attr_addr);
+extern unsigned int nand_flash_block_size(unsigned int *attr_addr);
+extern void nand_flash_read(unsigned int nand_ptr, unsigned int sz, unsigned int page_size, unsigned int dest_ptr); //输入参数:r0表示要读取的
+地址，r1表示要读取的字节大小(至少8个字节)，r2表示nand_flash页大小，r3指定返回数据的起始地址>。无输出参数
+extern void nand_flash_erase(unsigned int nand_ptr, unsigned int page_size);//输入参数:r0表示要檫除的地址，r1表示nand_flash页大小。无输出参数
+extern void nand_flash_write(unsigned int nand_ptr, unsigned int write_data_ptr, unsigned int sz, unsigned int page_size);//输入参数:r0表示要
+写入的地址，r1表示写入数据的首地址，r2表示要写入的字节大小，r3表示nand_flash页大小。无输出参数
+extern void utils_operator_divid(unsigned int dividend, unsigned int divid, unsigned int *quot_ptr, unsigned int *remain_ptr);

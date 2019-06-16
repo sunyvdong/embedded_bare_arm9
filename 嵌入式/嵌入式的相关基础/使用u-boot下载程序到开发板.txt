@@ -1,0 +1,6 @@
+实际已在ARM9 SC32440开发板测试过了
+
+1.使用op/eop把u-boot.bin烧写到nor flash(使用到oflash工具)
+2.开发板设置为nor flash启动，上电后立即按空格键，使板子进入u-boot而不是启动板子上的内核
+3.使用另一根USB连接PC和开发板的usb device口，安装驱动zadig-2.3
+4.输入n(表示烧写到NAND),然后使用dnw_100ask.exe工具发送要烧写的bin文件

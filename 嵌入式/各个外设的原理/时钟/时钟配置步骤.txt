@@ -1,0 +1,16 @@
+一.设置LOCK TIME锁存计数器
+二.根据FCLK、HCLK和PCLK的比例设置分频
+三.HDIVN不为0时，设置CPU工作与异步模式
+    mrc p15,0,r0,c1,c0,0
+    orr r0,r0,0xc0000000                  #R1_nF:OR:R1_iA
+    mcr p15,0,r0,c1,c0,0
+四.设置PLL，得到FCLK(一旦设置PLL，就会锁定LOCK TIME知道PLL输出稳定，然后使用新的时钟)。公式如下：
+    MPLL Control Register
+        Mpll = (2 * m * Fin) / (p * 2^S)
+        m = (MDIV + 8), p = (PDIV + 2), s = SDIV
+    UPLL Control Register
+        Upll = (m * Fin) / (p * 2^S)
+        m = (MDIV + 8), p = (PDIV + 2), s = SDIV
+五.使能时钟到具体的设备。初始化为使能状态，不需要设置
+
+

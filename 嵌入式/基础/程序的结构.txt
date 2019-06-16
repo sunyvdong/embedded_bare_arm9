@@ -1,0 +1,7 @@
+一个完整的程序包括:
+    .text                代码段
+    .data               数据段(全局变量)
+    .rodata            只读数据段(const 全局变量) 
+    .bss                 初值为0或无初值的全局变量
+    .commen         注释
+.bss和.commen不保存在bin文件中
